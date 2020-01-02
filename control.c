@@ -25,6 +25,8 @@ int main(int argc, char *argv[]){
     int semd;
     int shmd;
     int fd;
+    int v;
+    int r;
     if (strcmp(argv[1], "-c\n")){
       semd = semget(KEY, 1, IPC_CREAT | IPC_EXCL | 0644);
       if (semd == -1){
@@ -48,6 +50,26 @@ int main(int argc, char *argv[]){
       }
       printf("file created\n");
       close(fd);
+    }
+    if (strcmp(argv[1], "-r\n")){
+      // r = remove("semaphone.txt");
+      // if (r == -1){
+      //   printf("error %d: %s\n", errno, strerror(errno));
+      //   exit(1);
+      // }
+      // printf("file removed\n");
+      r = semctl(shmd, IPC_RMID, 0);
+      if (r == -1){
+         printf("error %d: %s\n", errno, strerror(errno));
+         exit(1);
+      }
+      printf("shared memory removed\n");
+      r = semctl(semd, IPC_RMID, 0);
+      if (r == -1){
+        printf("error %d: %s\n", errno, strerror(errno));
+        exit(1);
+      }
+      printf("semaphore removed\n");
     }
   }
   else{
