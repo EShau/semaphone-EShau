@@ -46,7 +46,7 @@ int main(){
   sb.sem_op = -1;
   op = semop(semd, &sb, 1);
   data = shmat(shmd, 0, 0);
-  fd = open("semaphone.txt", O_WRONLY | O_APPEND);
+  fd = open("semaphone.txt", O_APPEND);
   if (fd == -1){
     printf("error %d: %s\n", errno, strerror(errno));
     //exit(1);
