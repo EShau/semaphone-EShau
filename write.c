@@ -31,7 +31,7 @@ int main(){
     exit(1);
   }
   data = shmat(shmd, 0, 0);
-  fd = open("semaphone.txt", O_APPEND, 0644);
+  fd = open("semaphone.txt", O_APPEND);
   if (fd == -1){
     printf("error %d: %s\n", errno, strerror(errno));
     exit(1);
