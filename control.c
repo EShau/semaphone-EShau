@@ -76,13 +76,13 @@ int main(int argc, char *argv[]){
          //exit(1);
       }
       printf("file removed\n");
-      rm = shmctl(shmd, IPC_RMID, 0);
+      shmctl(shmd, IPC_RMID, 0);
       if (rm == -1){
         printf("error %d: %s\n", errno, strerror(errno));
         //exit(1);
       }
       printf("shared memory removed\n");
-      rm = semctl(semd, IPC_RMID, 0);
+      semctl(semd, IPC_RMID, 0);
       if (rm == -1){
          printf("error %d: %s\n", errno, strerror(errno));
          //exit(1);
