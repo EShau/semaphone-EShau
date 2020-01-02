@@ -58,7 +58,7 @@ int main(int argc, char *argv[]){
       //   exit(1);
       // }
       // printf("file removed\n");
-      r = semctl(shmd, IPC_RMID, 0);
+      r = shmctl(shmd, IPC_RMID, 0);
       if (r == -1){
          printf("error %d: %s\n", errno, strerror(errno));
          exit(1);
