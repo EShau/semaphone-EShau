@@ -27,6 +27,7 @@ int main(int argc, char *argv[]){
     int shmd;
     int fd;
     int v;
+    int r;
     int rm;
     if (strcmp(argv[1], "-c") == 0){
       semd = semget(KEY, 1, IPC_CREAT | IPC_EXCL | 0644);
