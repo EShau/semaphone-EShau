@@ -20,6 +20,7 @@ int main(){
   int fd;
   int w;
   int shmt;
+  int c;
   semd = semget(KEY, 1, 0);
   if (semd == -1){
     printf("error %d: %s\n", errno, strerror(errno));
@@ -39,9 +40,18 @@ int main(){
   printf("Last addition: %s\n", data);
   printf("Your addition: ");
   fgets(data, LAST_LINE, stdin);
-  write(fd, data, strlen(data));
+  w = write(fd, data, strlen(data));
+  if (w == -1){
+    printf("error %d: %s\n", errno, strerror(errno));
+    exit(1);
+  }
   shmt = shmdt(data);
   if (shmt == -1){
+    printf("error %d: %s\n", errno, strerror(errno));
+    exit(1);
+  }
+  c = close(fd);
+  if (c == -1){
     printf("error %d: %s\n", errno, strerror(errno));
     exit(1);
   }
