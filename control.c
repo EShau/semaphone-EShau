@@ -73,19 +73,19 @@ int main(int argc, char *argv[]){
       rm = remove("semaphone.txt");
       if (rm == -1){
          printf("error %d: %s\n", errno, strerror(errno));
-         exit(1);
-      }
-      printf("file removed\n");
-      rm = semctl(shmd, IPC_RMID, 0);
-      if (rm == -1){
-         printf("error %d: %s\n", errno, strerror(errno));
          //exit(1);
       }
-      printf("shared memory removed\n");
-      rm = shmctl(semd, IPC_RMID, 0);
+      printf("file removed\n");
+      rm = shmctl(shmd, IPC_RMID, 0);
       if (rm == -1){
         printf("error %d: %s\n", errno, strerror(errno));
         //exit(1);
+      }
+      printf("shared memory removed\n");
+      rm = semctl(semd, IPC_RMID, 0);
+      if (rm == -1){
+         printf("error %d: %s\n", errno, strerror(errno));
+         //exit(1);
       }
       printf("semaphore removed\n");
     }
