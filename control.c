@@ -31,7 +31,7 @@ int main(int argc, char *argv[]){
       semd = semget(KEY, 1, IPC_CREAT | IPC_EXCL | 0644);
       if (semd == -1){
         printf("error %d: %s\n", errno, strerror(errno));
-        exit(1);
+        //exit(1);
       }
       union semun us;
       us.val = 1;
@@ -40,13 +40,13 @@ int main(int argc, char *argv[]){
       shmd = shmget(KEY, SEG_SIZE, IPC_CREAT | IPC_EXCL | 0644);
       if (shmd == -1){
         printf("error %d: %s\n", errno, strerror(errno));
-        exit(1);
+        //exit(1);
       }
       printf("shared memory created\n");
       fd = open("semaphone.txt", O_CREAT, 0644);
       if (fd == -1){
         printf("error %d: %s\n", errno, strerror(errno));
-        exit(1);
+        //exit(1);
       }
       printf("file created\n");
       close(fd);
@@ -61,13 +61,13 @@ int main(int argc, char *argv[]){
       r = semctl(shmd, IPC_RMID, 0);
       if (r == -1){
          printf("error %d: %s\n", errno, strerror(errno));
-         exit(1);
+         //exit(1);
       }
       printf("shared memory removed\n");
       r = shmctl(semd, IPC_RMID, 0);
       if (r == -1){
         printf("error %d: %s\n", errno, strerror(errno));
-        exit(1);
+        //exit(1);
       }
       printf("semaphore removed\n");
     }
