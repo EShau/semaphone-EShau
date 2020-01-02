@@ -27,7 +27,7 @@ int main(int argc, char *argv[]){
     int fd;
     int v;
     int r;
-    if (strcmp(argv[1], "-c\n") == 0){
+    if (strcmp(argv[1], "-c") == 0){
       semd = semget(KEY, 1, IPC_CREAT | IPC_EXCL | 0644);
       if (semd == -1){
         printf("error %d: %s\n", errno, strerror(errno));
@@ -51,7 +51,7 @@ int main(int argc, char *argv[]){
       printf("file created\n");
       close(fd);
     }
-    if (strcmp(argv[1], "-r\n") == 0){
+    if (strcmp(argv[1], "-r") == 0){
       // r = remove("semaphone.txt");
       // if (r == -1){
       //   printf("error %d: %s\n", errno, strerror(errno));
