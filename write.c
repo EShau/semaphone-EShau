@@ -36,15 +36,10 @@ int main(){
     printf("error %d: %s\n", errno, strerror(errno));
     exit(1);
   }
-  printf("The story thus far:\n");
   printf("Last addition: %s\n", data);
   printf("Your addition: ");
   fgets(data, LAST_LINE, stdin);
-  w = write(fd, data, strlen(data));
-  if (w == -1){
-    printf("error %d: %s\n", errno, strerror(errno));
-    exit(1);
-  }
+  write(fd, data, strlen(data));
   shmt = shmdt(data);
   if (shmt == -1){
     printf("error %d: %s\n", errno, strerror(errno));
