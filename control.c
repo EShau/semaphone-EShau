@@ -11,6 +11,7 @@
 
 #define KEY 69420
 #define SEG_SIZE 200
+#define STORY_SIZE 500
 
 union semun {
   int              val;    /* Value for SETVAL */
@@ -26,7 +27,7 @@ int main(int argc, char *argv[]){
     int shmd;
     int fd;
     int v;
-    int r;
+    int rm;
     if (strcmp(argv[1], "-c") == 0){
       semd = semget(KEY, 1, IPC_CREAT | IPC_EXCL | 0644);
       if (semd == -1){
@@ -51,21 +52,37 @@ int main(int argc, char *argv[]){
       printf("file created\n");
       close(fd);
     }
-    if (strcmp(argv[1], "-r") == 0){
-      // r = remove("semaphone.txt");
-      // if (r == -1){
-      //   printf("error %d: %s\n", errno, strerror(errno));
-      //   exit(1);
-      // }
-      // printf("file removed\n");
-      r = semctl(shmd, IPC_RMID, 0);
+    if (strcmp(argv[1], "-v") == 0){
+      char buffer[STORY_SIZE];
+      printf("The story thus far\n");
+      fd = open("semaphone.txt", O_RDONLY);
+      if (fd == -1){
+        printf("error %d: %s\n", errno, strerror(errno));
+        //exit(1);
+      }
+      r = read(fd, buffer, sizeof(buffer));
       if (r == -1){
+        printf("error %d: %s\n", errno, strerror(errno));
+        //exit(1);
+      }
+      printf("%s\n", buffer);
+      close(fd);
+    }
+    if (strcmp(argv[1], "-r") == 0){
+      rm = remove("semaphone.txt");
+      if (rm == -1){
+         printf("error %d: %s\n", errno, strerror(errno));
+         exit(1);
+      }
+      printf("file removed\n");
+      rm = semctl(shmd, IPC_RMID, 0);
+      if (rm == -1){
          printf("error %d: %s\n", errno, strerror(errno));
          //exit(1);
       }
       printf("shared memory removed\n");
-      r = shmctl(semd, IPC_RMID, 0);
-      if (r == -1){
+      rm = shmctl(semd, IPC_RMID, 0);
+      if (rm == -1){
         printf("error %d: %s\n", errno, strerror(errno));
         //exit(1);
       }
