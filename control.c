@@ -51,7 +51,7 @@ int main(int argc, char *argv[]){
     if (strcmp(argv[1], "-v") == 0){
       char buffer[STORY_SIZE];
       buffer[0] = 0;
-      printf("The story thus far\n");
+      printf("The story thus far:\n");
       fd = open("semaphone.txt", O_RDONLY);
       if (fd == -1){
         printf("error fd %d: %s\n", errno, strerror(errno));
@@ -70,7 +70,7 @@ int main(int argc, char *argv[]){
       printf("trying to get in\n");
       char buffer[STORY_SIZE];
       buffer[0] = 0;
-      printf("The story thus far\n");
+      printf("The story thus far:\n");
       fd = open("semaphone.txt", O_RDONLY);
       if (fd == -1){
         printf("error fd %d: %s\n", errno, strerror(errno));
