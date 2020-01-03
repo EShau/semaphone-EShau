@@ -43,7 +43,6 @@ int main(){
     exit(1);
   }
   char buffer[256];
-  printf("%d\n", * size);
   lseek(fd, -*size, SEEK_END);
   r = read(fd, buffer, *size);
   if (r == -1){
